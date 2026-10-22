@@ -1,0 +1,148 @@
+/* ==========================================================
+   SKYBOOK — RESPONSIVE MEDIA QUERIES
+   Viewports: 375px (Mobile), 768px (Tablet), 1024px (Laptop), 1440px (Desktop)
+   ========================================================== */
+
+/* Tablet & Mobile (under 1024px) */
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 2.25rem;
+  }
+  
+  .search-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .flight-card {
+    grid-template-columns: 1fr 1.5fr;
+  }
+  
+  .fare-action {
+    grid-column: span 2;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-light);
+    padding-top: var(--space-md);
+    text-align: left;
+  }
+  
+  .admin-layout {
+    flex-direction: column;
+  }
+  
+  .admin-sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: var(--space-sm) var(--space-md);
+  }
+  
+  .admin-nav-item {
+    white-space: nowrap;
+    padding: 8px 12px;
+  }
+}
+
+/* Mobile Devices (under 768px) */
+@media (max-width: 768px) {
+  .navbar-container {
+    height: 60px;
+  }
+  
+  .nav-links {
+    gap: 12px;
+  }
+  
+  .nav-link span:not(.badge) {
+    display: none;
+  }
+  
+  .hero-section {
+    padding: 40px 0 70px;
+  }
+  
+  .hero-title {
+    font-size: 1.85rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+  
+  .search-box-card {
+    padding: var(--space-md);
+    margin-top: -30px;
+  }
+  
+  .search-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .flight-card {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  
+  .flight-times {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  
+  .duration-indicator {
+    width: 100%;
+  }
+  
+  .fare-action {
+    grid-column: span 1;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+  
+  .booking-flow-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Small Mobile (375px) */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.5rem;
+  }
+  
+  .trip-type-tabs {
+    flex-wrap: wrap;
+  }
+  
+  .btn {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+  
+  .pnr-box {
+    text-align: center;
+    width: 100%;
+  }
+  
+  .ticket-header {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+}

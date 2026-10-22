@@ -1,0 +1,285 @@
+/* ==========================================================
+   SKYBOOK — GLOBAL STYLES & DESIGN TOKENS
+   User Interface Design Lab Specifications
+   ========================================================== */
+
+:root {
+  /* Color Palette */
+  --primary-navy: #0f172a;
+  --primary-navy-light: #1e293b;
+  --primary-navy-dark: #0a0f1d;
+  
+  --sky-blue: #0284c7;
+  --sky-blue-hover: #0369a1;
+  --sky-blue-light: #e0f2fe;
+  --sky-blue-subtle: #f0f9ff;
+  
+  --accent-orange: #f97316;
+  --accent-orange-hover: #ea580c;
+  --accent-orange-light: #ffedd5;
+  
+  --accent-teal: #0d9488;
+  --accent-teal-light: #ccfbf1;
+  
+  --success-green: #10b981;
+  --success-green-light: #ecfdf5;
+  --danger-red: #ef4444;
+  --danger-red-light: #fef2f2;
+  --warning-amber: #f59e0b;
+  --warning-amber-light: #fffbeb;
+  
+  /* Neutral Grays */
+  --bg-page: #f8fafc;
+  --bg-card: #ffffff;
+  --border-light: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --text-subtle: #94a3b8;
+  --text-inverse: #ffffff;
+  
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  
+  /* Transitions */
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset & Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Common Layout Containers */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.main-content {
+  flex: 1;
+  padding-bottom: var(--space-2xl);
+}
+
+/* Badge Styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.badge-success {
+  background-color: var(--success-green-light);
+  color: var(--success-green);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.badge-warning {
+  background-color: var(--warning-amber-light);
+  color: var(--warning-amber);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.badge-danger {
+  background-color: var(--danger-red-light);
+  color: var(--danger-red);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.badge-sky {
+  background-color: var(--sky-blue-light);
+  color: var(--sky-blue);
+  border: 1px solid rgba(2, 132, 199, 0.2);
+}
+
+.badge-gray {
+  background-color: #f1f5f9;
+  color: var(--text-muted);
+  border: 1px solid var(--border-light);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.925rem;
+  transition: var(--transition);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: var(--sky-blue);
+  color: var(--text-inverse);
+  box-shadow: 0 2px 4px rgba(2, 132, 199, 0.25);
+}
+
+.btn-primary:hover {
+  background-color: var(--sky-blue-hover);
+  box-shadow: 0 4px 8px rgba(2, 132, 199, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-accent {
+  background-color: var(--accent-orange);
+  color: var(--text-inverse);
+  box-shadow: 0 2px 4px rgba(249, 115, 22, 0.25);
+}
+
+.btn-accent:hover {
+  background-color: var(--accent-orange-hover);
+  box-shadow: 0 4px 8px rgba(249, 115, 22, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: var(--primary-navy);
+  color: var(--text-inverse);
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary-navy-light);
+}
+
+.btn-outline {
+  border: 1px solid var(--border-medium);
+  color: var(--text-main);
+  background-color: #ffffff;
+}
+
+.btn-outline:hover {
+  background-color: #f8fafc;
+  border-color: var(--sky-blue);
+  color: var(--sky-blue);
+}
+
+.btn-danger {
+  background-color: var(--danger-red);
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+}
+
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+}
+
+.btn-lg {
+  padding: 14px 28px;
+  font-size: 1.05rem;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Card Container */
+.card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-lg);
+  transition: var(--transition);
+}
+
+/* Print Ticket Utility */
+@media print {
+  header, footer, .no-print, .btn, .admin-sidebar {
+    display: none !important;
+  }
+  body, .main-content {
+    background: #ffffff !important;
+    padding: 0 !important;
+  }
+  .ticket-print-wrapper {
+    box-shadow: none !important;
+    border: 2px solid #000000 !important;
+    page-break-inside: avoid;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+}
