@@ -70,8 +70,8 @@ const Navbar = () => {
               </Link>
               <button 
                 onClick={handleLogout} 
-                className="btn btn-outline btn-sm"
-                style={{ padding: '6px 10px', color: '#cbd5e1', borderColor: 'rgba(255,255,255,0.2)' }}
+                className="btn btn-outline btn-sm nav-btn-outline"
+                style={{ padding: '6px 10px' }}
                 title="Logout"
               >
                 <LogOut size={16} />
@@ -80,7 +80,7 @@ const Navbar = () => {
             </div>
           ) : (
             <div style={{ display: 'flex', gap: '8px' }}>
-              <Link to="/login" className="btn btn-outline btn-sm" style={{ color: '#ffffff', borderColor: 'rgba(255,255,255,0.3)' }}>
+              <Link to="/login" className="btn btn-outline btn-sm nav-btn-outline">
                 Sign In
               </Link>
               <Link to="/register" className="btn btn-primary btn-sm">

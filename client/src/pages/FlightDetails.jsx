@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
-import { Plane, ArrowRight, ShieldCheck, Clock, Luggage, Coffee, CheckCircle } from 'lucide-react';
+import { Plane, ArrowRight, ShieldCheck, Clock, Luggage, Coffee, CheckCircle, Wifi, Award } from 'lucide-react';
 import flightService from '../services/flightService';
 import LoadingSpinner from '../components/LoadingSpinner';
 import BookingSummary from '../components/BookingSummary';
+import { getAirlineInfo } from '../utils/airlineAssets';
 
 const formatTime = (dateString) => {
   if (!dateString) return '';
@@ -66,6 +67,8 @@ const FlightDetails = () => {
     navigate(`/booking/passengers?flightId=${flight.flight_id}&passengers=${passengerCount}`);
   };
 
+  const airlineInfo = getAirlineInfo(flight.airline_name);
+
   return (
     <div className="container" style={{ padding: '36px 16px 60px' }}>
       <div style={{ marginBottom: '24px' }}>
@@ -77,10 +80,10 @@ const FlightDetails = () => {
           &larr; Back to Results
         </button>
         <h1 style={{ fontSize: '1.85rem', fontWeight: 800, color: 'var(--primary-navy)' }}>
-          Flight Itinerary & Fare Breakdown
+          Flight Itinerary & Aircraft Details
         </h1>
         <p style={{ color: 'var(--text-muted)' }}>
-          Review itinerary details and fare inclusions before entering passenger information.
+          Review aircraft specifications, itinerary details, and fare inclusions before entering passenger information.
         </p>
       </div>
 
@@ -93,26 +96,63 @@ const FlightDetails = () => {
         {/* Left Column: Itinerary Specs */}
         <div>
           {/* Main Flight Card */}
-          <div className="card" style={{ marginBottom: '24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid var(--border-light)', paddingBottom: '16px' }}>
-              <div>
-                <span className="badge badge-sky" style={{ marginBottom: '4px' }}>{flight.airline_name}</span>
-                <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--primary-navy)' }}>
-                  Flight {flight.flight_number}
-                </h3>
-              </div>
-              <div style={{ textAlign: 'right' }}>
-                <span className="badge badge-success">Operated Directly</span>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px' }}>
-                  Economy Class
+          <div className="card" style={{ marginBottom: '24px', overflow: 'hidden', padding: 0 }}>
+            {/* Aircraft Hero Banner */}
+            <div style={{ position: 'relative', width: '100%', height: '180px', overflow: 'hidden', backgroundColor: '#0f172a' }}>
+              <img
+                src={airlineInfo.image}
+                alt={`${flight.airline_name} Aircraft`}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.88 }}
+                onError={(e) => { e.currentTarget.src = airlineInfo.fallbackSvg; }}
+              />
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(180deg, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.85) 100%)'
+              }} />
+              <div style={{
+                position: 'absolute',
+                bottom: '16px',
+                left: '20px',
+                right: '20px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'flex-end',
+                color: '#ffffff'
+              }}>
+                <div>
+                  <span
+                    className="badge"
+                    style={{
+                      backgroundColor: airlineInfo.primaryColor,
+                      color: '#ffffff',
+                      marginBottom: '6px',
+                      fontSize: '0.75rem'
+                    }}
+                  >
+                    {flight.airline_name}
+                  </span>
+                  <h3 style={{ fontSize: '1.4rem', fontWeight: 800, textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>
+                    Flight {flight.flight_number}
+                  </h3>
+                  <div style={{ fontSize: '0.85rem', opacity: 0.9 }}>
+                    <Plane size={14} style={{ display: 'inline', marginRight: '6px', transform: 'rotate(45deg)' }} />
+                    {airlineInfo.aircraftModel} &bull; {airlineInfo.cabinLayout}
+                  </div>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <span className="badge badge-success" style={{ fontSize: '0.75rem' }}>
+                    Non-Stop Direct
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Travel Date */}
-            <div style={{ fontWeight: 600, color: 'var(--text-muted)', marginBottom: '16px', fontSize: '0.9rem' }}>
-              Date: {formatDate(flight.departure_time)}
-            </div>
+            <div style={{ padding: '24px' }}>
+              {/* Travel Date */}
+              <div style={{ fontWeight: 600, color: 'var(--text-muted)', marginBottom: '16px', fontSize: '0.9rem' }}>
+                Date: {formatDate(flight.departure_time)}
+              </div>
 
             {/* Schedule Segment */}
             <div style={{
@@ -182,6 +222,7 @@ const FlightDetails = () => {
                   <strong>Meal:</strong> Available for purchase
                 </div>
               </div>
+            </div>
             </div>
           </div>
 

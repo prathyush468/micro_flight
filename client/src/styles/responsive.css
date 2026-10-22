@@ -21,6 +21,26 @@
     grid-template-columns: 1fr 1.5fr;
   }
   
+  .flight-card-classic {
+    grid-template-columns: 180px 1fr;
+  }
+  
+  .flight-pricing-section {
+    grid-column: span 2;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-light);
+    border-left: none;
+    padding-top: 14px;
+    padding-left: 0;
+  }
+  
+  .btn-select-flight {
+    width: auto !important;
+    min-width: 160px;
+  }
+  
   .fare-action {
     grid-column: span 2;
     flex-direction: row;
@@ -86,6 +106,51 @@
   .flight-card {
     grid-template-columns: 1fr;
     gap: var(--space-md);
+  }
+  
+  .flight-card-classic {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+  }
+  
+  .aircraft-image-wrapper {
+    height: 140px;
+  }
+  
+  .flight-timetable-section {
+    border-left: none;
+    border-right: none;
+    padding: 12px 0;
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+  
+  .timetable-grid {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  
+  .flight-path-block {
+    max-width: 120px;
+  }
+  
+  .flight-pricing-section {
+    grid-column: span 1;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    padding-left: 0;
+  }
+  
+  .price-tag-wrapper {
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  
+  .btn-select-flight {
+    width: 100% !important;
   }
   
   .flight-times {

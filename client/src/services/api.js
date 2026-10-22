@@ -21,7 +21,17 @@ export const request = async (endpoint, options = {}) => {
 
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
-    const data = await response.json();
+    
+    // Safely parse JSON body (guards against empty responses, 502/504 HTML proxy errors)
+    let data = {};
+    const text = await response.text();
+    if (text) {
+      try {
+        data = JSON.parse(text);
+      } catch {
+        data = { message: text };
+      }
+    }
 
     if (!response.ok) {
       // If unauthorized token, clear saved token
@@ -36,6 +46,9 @@ export const request = async (endpoint, options = {}) => {
     return data;
   } catch (error) {
     console.error(`[API Error: ${endpoint}]`, error.message);
+    if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError') || error.message.includes('Unexpected end of JSON')) {
+      throw new Error('Unable to connect to the backend server. Please verify that the SkyBook API server is running on port 5000.');
+    }
     throw error;
   }
 };

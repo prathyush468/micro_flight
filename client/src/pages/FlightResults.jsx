@@ -232,12 +232,65 @@ const FlightResults = () => {
               <span>{error}</span>
             </div>
           ) : flights.length === 0 ? (
-            <EmptyState
-              title="No flights found for this itinerary"
-              description="There are currently no flights matching your chosen origin, destination, or price filters. Try adjusting your dates or clearing filters."
-              actionText="Reset Search"
-              onActionClick={resetFilters}
-            />
+            <div style={{
+              backgroundColor: '#ffffff',
+              borderRadius: 'var(--radius-lg)',
+              border: '1px solid var(--border-light)',
+              padding: '40px 24px',
+              textAlign: 'center',
+              boxShadow: 'var(--shadow-sm)'
+            }}>
+              <div style={{
+                width: '64px',
+                height: '64px',
+                borderRadius: '50%',
+                backgroundColor: 'var(--sky-blue-light)',
+                color: 'var(--sky-blue)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 16px'
+              }}>
+                <Plane size={32} />
+              </div>
+              
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--primary-navy)', marginBottom: '8px' }}>
+                {selectedAirline 
+                  ? `No ${selectedAirline} flights found on this date`
+                  : 'No scheduled flights found for this selection'}
+              </h3>
+              
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', maxWidth: '480px', margin: '0 auto 20px', lineHeight: '1.5' }}>
+                {selectedAirline
+                  ? `We couldn't find flights operated by ${selectedAirline} on ${origin} → ${destination} for the selected date. Other airlines may have flights available on this route.`
+                  : 'Try clearing your airline filter or searching across all upcoming dates to view available flights on this route.'}
+              </p>
+
+              <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                {selectedAirline && (
+                  <button
+                    onClick={() => setSelectedAirline('')}
+                    className="btn btn-primary btn-sm"
+                  >
+                    Show All Airlines on {origin} → {destination}
+                  </button>
+                )}
+
+                <button
+                  onClick={resetFilters}
+                  className="btn btn-outline btn-sm"
+                >
+                  Reset All Filters
+                </button>
+
+                <button
+                  onClick={() => setShowModifySearch(true)}
+                  className="btn btn-outline btn-sm"
+                >
+                  Change Date or Route
+                </button>
+              </div>
+            </div>
           ) : (
             <div>
               <div style={{ marginBottom: '14px', fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 500 }}>

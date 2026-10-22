@@ -5,9 +5,21 @@ import flightService from '../services/flightService';
 import DateSelector from './DateSelector';
 import PassengerSelector from './PassengerSelector';
 
+// Initial fallback airports so dropdowns are always populated immediately
+const DEFAULT_AIRPORTS = [
+  { airport_code: 'COK', airport_name: 'Cochin International Airport', city: 'Kochi' },
+  { airport_code: 'BLR', airport_name: 'Kempegowda International Airport', city: 'Bengaluru' },
+  { airport_code: 'DEL', airport_name: 'Indira Gandhi International Airport', city: 'New Delhi' },
+  { airport_code: 'BOM', airport_name: 'Chhatrapati Shivaji Maharaj International Airport', city: 'Mumbai' },
+  { airport_code: 'HYD', airport_name: 'Rajiv Gandhi International Airport', city: 'Hyderabad' },
+  { airport_code: 'MAA', airport_name: 'Chennai International Airport', city: 'Chennai' },
+  { airport_code: 'GOI', airport_name: 'Dabolim Airport', city: 'Goa' },
+  { airport_code: 'CCU', airport_name: 'Netaji Subhash Chandra Bose International Airport', city: 'Kolkata' }
+];
+
 const SearchForm = ({ initialValues = {}, compact = false }) => {
   const navigate = useNavigate();
-  const [airports, setAirports] = useState([]);
+  const [airports, setAirports] = useState(DEFAULT_AIRPORTS);
   const [loadingAirports, setLoadingAirports] = useState(true);
 
   // Form State
@@ -34,9 +46,11 @@ const SearchForm = ({ initialValues = {}, compact = false }) => {
     const fetchAirports = async () => {
       try {
         const data = await flightService.getAirports();
-        setAirports(data);
+        if (data && data.length > 0) {
+          setAirports(data);
+        }
       } catch (err) {
-        console.error('Failed to load airports', err);
+        console.error('Failed to load airports from API, using default airport list', err);
       } finally {
         setLoadingAirports(false);
       }
@@ -142,7 +156,7 @@ const SearchForm = ({ initialValues = {}, compact = false }) => {
               value={origin}
               onChange={(e) => setOrigin(e.target.value)}
               className="form-control"
-              disabled={loadingAirports}
+              disabled={loadingAirports && airports.length === 0}
               required
             >
               {airports.map((a) => (
@@ -174,7 +188,7 @@ const SearchForm = ({ initialValues = {}, compact = false }) => {
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
               className="form-control"
-              disabled={loadingAirports}
+              disabled={loadingAirports && airports.length === 0}
               required
             >
               {airports.map((a) => (

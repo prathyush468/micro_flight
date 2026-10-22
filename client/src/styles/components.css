@@ -82,6 +82,21 @@
   gap: 6px;
 }
 
+.navbar .btn-outline,
+.nav-btn-outline {
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  transition: var(--transition);
+}
+
+.navbar .btn-outline:hover,
+.nav-btn-outline:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.7) !important;
+  color: #ffffff !important;
+}
+
 /* 2. FOOTER */
 .footer {
   background-color: var(--primary-navy-dark);
@@ -254,7 +269,278 @@
   margin-top: 2px;
 }
 
-/* 5. FLIGHT CARD */
+/* 5. FLIGHT CARD (CLASSIC CLEAN UI WITH AIRCRAFT VISUAL) */
+.flight-card-classic {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  transition: var(--transition);
+  display: grid;
+  grid-template-columns: 210px 1fr 190px;
+  gap: 20px;
+  align-items: stretch;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.flight-card-classic:hover {
+  border-color: var(--sky-blue);
+  box-shadow: 0 12px 24px -4px rgba(15, 23, 42, 0.09);
+  transform: translateY(-2px);
+}
+
+/* 5.1 Aircraft Visual Leading Block */
+.aircraft-visual-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.aircraft-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 110px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #f1f5f9;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.aircraft-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.flight-card-classic:hover .aircraft-image {
+  transform: scale(1.06);
+}
+
+.airline-badge-overlay {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.aircraft-specs-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.75rem;
+}
+
+.aircraft-model-name {
+  font-weight: 600;
+  color: var(--primary-navy);
+}
+
+.cabin-class-tag {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+}
+
+/* 5.2 Flight Timetable & Route */
+.flight-timetable-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 18px;
+  border-left: 1px solid var(--border-light);
+  border-right: 1px solid var(--border-light);
+}
+
+.flight-carrier-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.carrier-title {
+  font-size: 1rem;
+  color: var(--primary-navy);
+}
+
+.carrier-flight-no {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-left: 4px;
+}
+
+.timetable-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.time-block {
+  min-width: 100px;
+}
+
+.time-origin {
+  text-align: left;
+}
+
+.time-destination {
+  text-align: right;
+}
+
+.time-value {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.station-code {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--sky-blue);
+  margin-top: 2px;
+}
+
+.city-name {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.date-stamp {
+  font-size: 0.7rem;
+  color: var(--text-subtle);
+  margin-top: 2px;
+}
+
+.flight-path-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  max-width: 170px;
+  text-align: center;
+}
+
+.duration-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.flight-path-track {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #cbd5e1 0%, var(--sky-blue) 50%, #cbd5e1 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px 0;
+}
+
+.track-node {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--sky-blue);
+}
+
+.start-node { left: 0; }
+.end-node { right: 0; }
+
+.track-plane-icon {
+  background: #ffffff;
+  padding: 0 4px;
+  transform: rotate(90deg);
+}
+
+.flight-stops-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--success-green);
+  text-transform: uppercase;
+}
+
+.flight-amenities-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding-top: 10px;
+  border-top: 1px dashed var(--border-light);
+  flex-wrap: wrap;
+}
+
+.amenity-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* 5.3 Pricing & Action Column */
+.flight-pricing-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  text-align: right;
+  padding-left: 10px;
+}
+
+.price-tag-wrapper {
+  text-align: right;
+}
+
+.fare-subtext {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.fare-figure {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.fare-taxes-note {
+  font-size: 0.7rem;
+  color: var(--text-subtle);
+  margin-top: 2px;
+}
+
+.seat-inventory-status {
+  margin: 8px 0;
+}
+
+.btn-select-flight {
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 4px rgba(249, 115, 22, 0.2);
+}
+
+/* Keep previous styles for backwards compatibility */
 .flight-card {
   background: #ffffff;
   border: 1px solid var(--border-light);
