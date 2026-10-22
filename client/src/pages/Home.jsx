@@ -100,7 +100,7 @@ const Home = () => {
       <section
         className="hero-section"
         style={{
-          backgroundImage: `linear-gradient(180deg, rgba(11, 25, 44, 0.72) 0%, rgba(11, 25, 44, 0.45) 45%, rgba(15, 23, 42, 0.9) 100%), url(${heroAirplaneImg})`
+          backgroundImage: `linear-gradient(180deg, rgba(10, 20, 35, 0.35) 0%, rgba(10, 20, 35, 0.15) 45%, rgba(15, 23, 42, 0.72) 100%), url(${heroAirplaneImg})`
         }}
       >
         <div className="container">
