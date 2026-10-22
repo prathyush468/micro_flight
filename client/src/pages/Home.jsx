@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Plane, ShieldCheck, Clock, Award, Compass, CreditCard, CheckCircle, MapPin, ArrowRight } from 'lucide-react';
 import SearchForm from '../components/SearchForm';
-import heroAirplaneImg from '../assets/hero-airplane.png';
+import heroAirplaneImg from '../assets/hero-airplane.jpg';
 
 // Authentic Landmark Imagery for Top Destinations
 import bengaluruImg from '../assets/destinations/bengaluru.jpg';
@@ -102,9 +102,9 @@ const Home = () => {
         style={{
           backgroundImage: `url(${heroAirplaneImg})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center center',
+          backgroundPosition: 'center 35%',
           backgroundRepeat: 'no-repeat',
-          backgroundColor: '#191c22'
+          backgroundColor: '#0e1f3d'
         }}
       >
         <div className="container">

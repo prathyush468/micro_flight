@@ -143,10 +143,10 @@
 /* 3. HERO & SEARCH SECTION */
 .hero-section {
   position: relative;
-  background-color: #191c22;
-  background-image: url('../assets/hero-airplane.png');
+  background-color: #0e1f3d;
+  background-image: url('../assets/hero-airplane.jpg');
   background-size: cover;
-  background-position: center center;
+  background-position: center 35%;
   background-repeat: no-repeat;
   color: #ffffff;
   padding: 85px 0 115px;
