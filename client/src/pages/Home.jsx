@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Plane, ShieldCheck, Clock, Award, Compass, CreditCard, CheckCircle, MapPin, ArrowRight } from 'lucide-react';
 import SearchForm from '../components/SearchForm';
+import heroAirplaneImg from '../assets/hero-airplane.jpg';
 
 // Authentic Landmark Imagery for Top Destinations
 import bengaluruImg from '../assets/destinations/bengaluru.jpg';
@@ -96,7 +97,12 @@ const Home = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="hero-section">
+      <section
+        className="hero-section"
+        style={{
+          backgroundImage: `linear-gradient(180deg, rgba(11, 25, 44, 0.72) 0%, rgba(11, 25, 44, 0.45) 45%, rgba(15, 23, 42, 0.9) 100%), url(${heroAirplaneImg})`
+        }}
+      >
         <div className="container">
           <div className="hero-content">
             <div className="hero-badge">
