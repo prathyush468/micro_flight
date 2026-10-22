@@ -25,7 +25,6 @@ const formatDuration = (minutes) => {
 const FlightCard = ({ flight, passengerCount = 1 }) => {
   const navigate = useNavigate();
   const airlineInfo = getAirlineInfo(flight.airline_name);
-  const [imgSrc, setImgSrc] = useState(airlineInfo.image);
 
   const handleSelectFlight = () => {
     navigate(`/flights/${flight.flight_id}?passengers=${passengerCount}`);
@@ -39,10 +38,9 @@ const FlightCard = ({ flight, passengerCount = 1 }) => {
       <div className="aircraft-visual-container">
         <div className="aircraft-image-wrapper">
           <img
-            src={imgSrc}
+            src={airlineInfo.image}
             alt={`${flight.airline_name} Aircraft - ${airlineInfo.aircraftModel}`}
             className="aircraft-image"
-            onError={() => setImgSrc(airlineInfo.fallbackSvg)}
             loading="lazy"
           />
           <div
