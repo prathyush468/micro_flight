@@ -1,15 +1,65 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Plane, ShieldCheck, Clock, Award, Compass, CreditCard, CheckCircle } from 'lucide-react';
+import { Plane, ShieldCheck, Clock, Award, Compass, CreditCard, CheckCircle, MapPin, ArrowRight } from 'lucide-react';
 import SearchForm from '../components/SearchForm';
 
+// Authentic Landmark Imagery for Top Destinations
+import bengaluruImg from '../assets/destinations/bengaluru.jpg';
+import kochiImg from '../assets/destinations/kochi.jpg';
+import delhiImg from '../assets/destinations/delhi.jpg';
+import mumbaiImg from '../assets/destinations/mumbai.jpg';
+import goaImg from '../assets/destinations/goa.jpg';
+import kolkataImg from '../assets/destinations/kolkata.jpg';
+
 const POPULAR_DESTINATIONS = [
-  { city: 'Bengaluru', code: 'BLR', state: 'Karnataka', price: '2,850', bg: 'linear-gradient(135deg, #1e3a8a, #0284c7)' },
-  { city: 'Kochi', code: 'COK', state: 'Kerala', price: '2,999', bg: 'linear-gradient(135deg, #065f46, #0d9488)' },
-  { city: 'New Delhi', code: 'DEL', state: 'Delhi NCR', price: '5,200', bg: 'linear-gradient(135deg, #7c2d12, #ea580c)' },
-  { city: 'Mumbai', code: 'BOM', state: 'Maharashtra', price: '4,500', bg: 'linear-gradient(135deg, #4c1d95, #7c3aed)' },
-  { city: 'Goa', code: 'GOI', state: 'Goa', price: '2,750', bg: 'linear-gradient(135deg, #0f766e, #14b8a6)' },
-  { city: 'Kolkata', code: 'CCU', state: 'West Bengal', price: '4,900', bg: 'linear-gradient(135deg, #831843, #db2777)' },
+  {
+    city: 'Bengaluru',
+    code: 'BLR',
+    state: 'Karnataka',
+    landmark: 'Vidhana Soudha & Garden City',
+    price: '2,850',
+    image: bengaluruImg
+  },
+  {
+    city: 'Kochi',
+    code: 'COK',
+    state: 'Kerala',
+    landmark: 'Backwaters & Queen of Arabian Sea',
+    price: '2,999',
+    image: kochiImg
+  },
+  {
+    city: 'New Delhi',
+    code: 'DEL',
+    state: 'Delhi NCR',
+    landmark: 'India Gate & Historical Heritage',
+    price: '5,200',
+    image: delhiImg
+  },
+  {
+    city: 'Mumbai',
+    code: 'BOM',
+    state: 'Maharashtra',
+    landmark: 'Gateway of India & Marine Drive',
+    price: '4,500',
+    image: mumbaiImg
+  },
+  {
+    city: 'Goa',
+    code: 'GOI',
+    state: 'Goa',
+    landmark: 'Pristine Beaches & Coastal Sunset',
+    price: '2,750',
+    image: goaImg
+  },
+  {
+    city: 'Kolkata',
+    code: 'CCU',
+    state: 'West Bengal',
+    landmark: 'Victoria Memorial & Cultural Capital',
+    price: '4,900',
+    image: kolkataImg
+  }
 ];
 
 const FEATURES = [
@@ -81,46 +131,52 @@ const Home = () => {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
           gap: '24px'
         }}>
           {POPULAR_DESTINATIONS.map((dest) => (
-            <div
-              key={dest.code}
-              style={{
-                background: dest.bg,
-                color: '#ffffff',
-                borderRadius: 'var(--radius-lg)',
-                padding: '28px',
-                boxShadow: 'var(--shadow-md)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                minHeight: '180px',
-                transition: 'var(--transition)'
-              }}
-            >
-              <div>
-                <span style={{ fontSize: '0.85rem', opacity: 0.85, textTransform: 'uppercase', letterSpacing: '1px' }}>
-                  {dest.state}
-                </span>
-                <h3 style={{ fontSize: '1.6rem', fontWeight: 800, margin: '4px 0' }}>
-                  {dest.city} ({dest.code})
-                </h3>
-              </div>
+            <div key={dest.code} className="destination-card">
+              {/* Landmark Photograph Background */}
+              <div
+                className="destination-card-bg"
+                style={{ backgroundImage: `url(${dest.image})` }}
+              />
+              <div className="destination-card-overlay" />
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: '14px' }}>
-                <div>
-                  <div style={{ fontSize: '0.75rem', opacity: 0.8 }}>Starting from</div>
-                  <div style={{ fontSize: '1.35rem', fontWeight: 800 }}>&#8377;{dest.price}</div>
+              {/* Card Content */}
+              <div className="destination-card-content">
+                <div className="destination-card-top">
+                  <span className="destination-state-badge">
+                    {dest.state}
+                  </span>
+                  <span className="destination-code-badge">
+                    {dest.code}
+                  </span>
                 </div>
-                <Link
-                  to={`/flights?destination=${dest.code}`}
-                  className="btn btn-sm"
-                  style={{ backgroundColor: '#ffffff', color: 'var(--primary-navy)' }}
-                >
-                  View Flights
-                </Link>
+
+                <div className="destination-card-bottom">
+                  <h3 className="destination-card-title">
+                    {dest.city}
+                  </h3>
+                  <div className="destination-card-landmark">
+                    <MapPin size={13} style={{ flexShrink: 0 }} />
+                    <span>{dest.landmark}</span>
+                  </div>
+
+                  <div className="destination-card-action-row">
+                    <div>
+                      <div className="destination-price-label">Starting from</div>
+                      <div className="destination-price-value">&#8377;{dest.price}</div>
+                    </div>
+                    <Link
+                      to={`/flights?destination=${dest.code}`}
+                      className="destination-btn"
+                    >
+                      <span>View Flights</span>
+                      <ArrowRight size={14} />
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           ))}

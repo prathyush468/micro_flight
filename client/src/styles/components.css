@@ -853,3 +853,173 @@
   box-shadow: var(--shadow-xl);
   padding: var(--space-xl);
 }
+
+/* ==========================================================================
+   Popular Destination Cards (Classic Photographic UI)
+   ========================================================================== */
+
+.destination-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 22px;
+  color: #ffffff;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.16);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.destination-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.32);
+}
+
+.destination-card-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+
+.destination-card:hover .destination-card-bg {
+  transform: scale(1.08);
+}
+
+.destination-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.32) 0%,
+    rgba(15, 23, 42, 0.45) 40%,
+    rgba(15, 23, 42, 0.92) 100%
+  );
+  z-index: 2;
+  transition: background 0.35s ease;
+}
+
+.destination-card:hover .destination-card-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.18) 0%,
+    rgba(15, 23, 42, 0.4) 35%,
+    rgba(15, 23, 42, 0.96) 100%
+  );
+}
+
+.destination-card-content {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.destination-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.destination-state-badge {
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.destination-code-badge {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+}
+
+.destination-card-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  padding-top: 12px;
+}
+
+.destination-card-title {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 2px 0;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.destination-card-landmark {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 500;
+  margin-bottom: 12px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.destination-card-action-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.destination-price-label {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.78);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.destination-price-value {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.destination-btn {
+  background: #ffffff;
+  color: var(--primary-navy);
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.destination-card:hover .destination-btn {
+  background: var(--sky-blue);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+}
