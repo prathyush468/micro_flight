@@ -1,7 +1,8 @@
 const mysql = require('mysql2/promise');
 const dotenv = require('dotenv');
+const path = require('path');
 
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 // Create connection pool for MySQL with ACID transaction capability
 const pool = mysql.createPool({

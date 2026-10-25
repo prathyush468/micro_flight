@@ -1,3 +1,5 @@
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 const app = require('./app');
 const { testConnection } = require('./config/database');
 
@@ -10,7 +12,7 @@ const startServer = async () => {
     console.warn('[Server Warning] Could not establish initial database connection. Check MySQL credentials.');
   }
 
-  const server = app.listen(PORT, () => {
+  const server = app.listen(PORT, '0.0.0.0', () => {
     console.log(`=================================================`);
     console.log(`✈️  SkyBook Flight Reservation API Server`);
     console.log(`🚀  Running at: http://localhost:${PORT}`);

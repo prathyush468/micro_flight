@@ -11,6 +11,16 @@ let testBookingPnr = '';
 let testBookingId = null;
 
 before(async () => {
+  // Ensure flight 1 is in the future and has available seats for testing
+  await pool.query(`
+    UPDATE flights 
+    SET departure_time = DATE_ADD(NOW(), INTERVAL 2 DAY),
+        arrival_time = DATE_ADD(NOW(), INTERVAL 2 DAY) + INTERVAL 2 HOUR,
+        status = 'scheduled',
+        available_seats = 150
+    WHERE flight_id = 1
+  `);
+
   await new Promise((resolve) => {
     server = app.listen(0, () => {
       const port = server.address().port;
