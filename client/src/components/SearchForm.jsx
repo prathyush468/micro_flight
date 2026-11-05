@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PlaneTakeoff, PlaneLanding, Search, ArrowRightLeft, AlertCircle } from 'lucide-react';
 import flightService from '../services/flightService';
 import DateSelector from './DateSelector';
 import PassengerSelector from './PassengerSelector';
+import { FlyingButton } from './reactbits';
 
 // Initial fallback airports so dropdowns are always populated immediately
 const DEFAULT_AIRPORTS = [
@@ -64,28 +65,34 @@ const SearchForm = ({ initialValues = {}, compact = false }) => {
     setDestination(origin);
   };
 
+  const pendingSearchRef = useRef(null);
+
   const handleSearchSubmit = (e) => {
-    e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
     setError('');
 
     // Business rule: Origin and Destination must differ
     if (!origin || !destination) {
       setError('Please select both Origin and Destination airports');
+      pendingSearchRef.current = null;
       return;
     }
 
     if (origin.toUpperCase() === destination.toUpperCase()) {
       setError('Origin and Destination airports must be different');
+      pendingSearchRef.current = null;
       return;
     }
 
     if (!departureDate) {
       setError('Please select a valid departure date');
+      pendingSearchRef.current = null;
       return;
     }
 
     if (tripType === 'round-trip' && !returnDate) {
       setError('Please select a return date for round-trip journey');
+      pendingSearchRef.current = null;
       return;
     }
 
@@ -103,7 +110,25 @@ const SearchForm = ({ initialValues = {}, compact = false }) => {
       queryParams.append('returnDate', returnDate);
     }
 
-    navigate(`/flights?${queryParams.toString()}`);
+    pendingSearchRef.current = queryParams.toString();
+
+    // Safety fallback: if hardware acceleration or animation is reduced/interrupted,
+    // ensure search completes after the expected cycle duration
+    setTimeout(() => {
+      if (pendingSearchRef.current) {
+        const query = pendingSearchRef.current;
+        pendingSearchRef.current = null;
+        navigate(`/flights?${query}`);
+      }
+    }, 2800);
+  };
+
+  const handleFlightAnimationEnd = () => {
+    if (pendingSearchRef.current) {
+      const query = pendingSearchRef.current;
+      pendingSearchRef.current = null;
+      navigate(`/flights?${query}`);
+    }
   };
 
   return (
@@ -223,11 +248,40 @@ const SearchForm = ({ initialValues = {}, compact = false }) => {
           />
         </div>
 
-        <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
-          <button type="submit" className="btn btn-accent btn-lg" style={{ minWidth: '220px' }}>
-            <Search size={18} />
-            Search Flights
-          </button>
+        {/* Hidden submit button to preserve natural Enter-key form submissions */}
+        <button type="submit" style={{ display: 'none' }} aria-hidden="true" />
+
+        <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }}>
+          <div style={{
+            width: '260px',
+            height: '140px',
+            position: 'relative',
+            overflow: 'hidden',
+            borderRadius: 'var(--radius-lg)'
+          }}>
+            <FlyingButton
+              buttonColor="var(--accent-orange)"
+              thrustColor="#38bdf8"
+              smokeColor="#cbd5e1"
+              textColor="#ffffff"
+              size="medium"
+              radius={8}
+              altitude={70}
+              hoverTime={1.2}
+              trigger="click"
+              carryCursor={false}
+              jets={2}
+              thrusters={true}
+              onClick={handleSearchSubmit}
+              onAnimationEnd={handleFlightAnimationEnd}
+              style={{ minHeight: '140px', height: '140px' }}
+            >
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontWeight: 700, fontSize: '0.95rem' }}>
+                <Search size={16} />
+                Search Flights
+              </span>
+            </FlyingButton>
+          </div>
         </div>
       </form>
     </div>

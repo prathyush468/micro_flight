@@ -1,0 +1,67 @@
+.spotlight-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: var(--radius-lg, 16px);
+  background-color: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-light, #e2e8f0);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s ease;
+  --spotlight-x: 0px;
+  --spotlight-y: 0px;
+  --spotlight-opacity: 0;
+}
+
+.spotlight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px -6px rgba(15, 23, 42, 0.08), 0 6px 12px -4px rgba(15, 23, 42, 0.04);
+  border-color: rgba(2, 132, 199, 0.45);
+}
+
+.spotlight-card__light {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--spotlight-opacity);
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    var(--spotlight-size) circle at var(--spotlight-x) var(--spotlight-y),
+    var(--spotlight-color, rgba(2, 132, 199, 0.16)),
+    transparent 70%
+  );
+}
+
+.spotlight-card__border {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  opacity: var(--spotlight-opacity);
+  transition: opacity 0.3s ease;
+  padding: 1px;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  background: radial-gradient(
+    calc(var(--spotlight-size) * 0.75) circle at var(--spotlight-x) var(--spotlight-y),
+    var(--sky-blue, #0284c7),
+    transparent 70%
+  );
+}
+
+.spotlight-card__content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight-card:hover {
+    transform: none;
+  }
+  .spotlight-card__light,
+  .spotlight-card__border {
+    display: none;
+  }
+}

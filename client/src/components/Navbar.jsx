@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Plane, User, LogOut, ShieldCheck, Ticket, Search, Home as HomeIcon } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { Magnet, ShinyText, GlitchText } from './reactbits';
 
 const Navbar = () => {
   const { user, isAuthenticated, isAdmin, logout } = useAuth();
@@ -15,12 +16,30 @@ const Navbar = () => {
   return (
     <header className="navbar no-print">
       <div className="container navbar-container">
-        {/* Brand / Logo */}
+        {/* Brand / Logo with React Bits Magnet & GlitchText */}
         <Link to="/" className="nav-brand">
-          <div className="nav-brand-icon">
-            <Plane size={22} />
-          </div>
-          <div>Sky<span>Book</span></div>
+          <Magnet padding={25} magnetStrength={3}>
+            <div className="nav-brand-icon">
+              <Plane size={22} />
+            </div>
+          </Magnet>
+          <GlitchText
+            speed={0.5}
+            enableShadows={true}
+            offset={6}
+            intensity={0.4}
+            shadowColors={['#38bdf8', '#0284c7']}
+            fontSize="1.35rem"
+            fontWeight={800}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              letterSpacing: '-0.02em',
+              lineHeight: 1
+            }}
+          >
+            <span>Sky<span style={{ color: 'var(--sky-blue)' }}>Book</span></span>
+          </GlitchText>
         </Link>
 
         {/* Navigation Links */}
@@ -52,7 +71,9 @@ const Navbar = () => {
               <li>
                 <NavLink to="/admin" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
                   <ShieldCheck size={18} color="#38bdf8" />
-                  <span style={{ color: '#38bdf8' }}>Admin Panel</span>
+                  <span style={{ color: '#38bdf8' }}>
+                    <ShinyText text="Admin Panel" speed={3} color="#38bdf8" shineColor="#ffffff" />
+                  </span>
                 </NavLink>
               </li>
             )}

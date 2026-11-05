@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Plane, Shield, Heart, Award } from 'lucide-react';
+import { Magnet, ShinyText } from './reactbits';
 
 const Footer = () => {
   return (
@@ -10,17 +11,19 @@ const Footer = () => {
           {/* Brand Info */}
           <div>
             <div className="nav-brand" style={{ marginBottom: '14px' }}>
-              <div className="nav-brand-icon">
-                <Plane size={20} />
-              </div>
-              <div style={{ color: '#fff' }}>Sky<span style={{ color: '#0284c7' }}>Book</span></div>
+              <Magnet padding={20} magnetStrength={3}>
+                <div className="nav-brand-icon">
+                  <Plane size={20} />
+                </div>
+              </Magnet>
+              <div style={{ color: '#fff' }}>Sky<ShinyText text="Book" speed={3.5} color="#0284c7" shineColor="#ffffff" /></div>
             </div>
             <p style={{ fontSize: '0.9rem', lineHeight: '1.6', color: '#94a3b8' }}>
               Modern Flight Reservation System integrating Software Engineering, User Interface Design Lab, and RDBMS Lab principles.
             </p>
             <div style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
               <span className="badge badge-sky"><Award size={14} /> MCA Semester V</span>
-              <span className="badge badge-success"><Shield size={14} /> ACID Compliant</span>
+              <span className="badge badge-success"><Shield size={14} /> <ShinyText text="ACID Compliant" speed={3} color="#10b981" shineColor="#ffffff" /></span>
             </div>
           </div>
 

@@ -6,6 +6,7 @@ import FlightCard from '../components/FlightCard';
 import LoadingSpinner from '../components/LoadingSpinner';
 import EmptyState from '../components/EmptyState';
 import SearchForm from '../components/SearchForm';
+import { BlurText, CountUp } from '../components/reactbits';
 
 const AIRLINES = ['Air India', 'IndiGo', 'Vistara', 'SpiceJet', 'Akasa Air'];
 
@@ -293,8 +294,8 @@ const FlightResults = () => {
             </div>
           ) : (
             <div>
-              <div style={{ marginBottom: '14px', fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 500 }}>
-                Showing <strong>{flights.length}</strong> available flight{flights.length > 1 ? 's' : ''}
+              <div style={{ marginBottom: '14px', fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                Showing <strong style={{ color: 'var(--primary-navy)' }}><CountUp to={flights.length} duration={1.2} /></strong> available flight{flights.length > 1 ? 's' : ''}
               </div>
 
               {flights.map((flight) => (

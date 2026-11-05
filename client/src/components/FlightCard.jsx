@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Plane, Clock, ArrowRight, AlertCircle, CheckCircle2, Luggage, Wifi, Shield } from 'lucide-react';
 import { getAirlineInfo } from '../utils/airlineAssets';
+import { ShinyText } from './reactbits';
 
 const formatTime = (dateString) => {
   if (!dateString) return '';
@@ -69,7 +70,7 @@ const FlightCard = ({ flight, passengerCount = 1 }) => {
             <span className="carrier-flight-no">&bull; {flight.flight_number}</span>
           </div>
           <span className="badge badge-sky" style={{ fontSize: '0.7rem', padding: '2px 8px' }}>
-            Non-Stop Direct
+            <ShinyText text="Non-Stop Direct" speed={3} color="var(--sky-blue)" shineColor="#ffffff" />
           </span>
         </div>
 
@@ -133,7 +134,8 @@ const FlightCard = ({ flight, passengerCount = 1 }) => {
         <div className="seat-inventory-status">
           {isLowSeats ? (
             <span className="badge badge-warning" style={{ fontSize: '0.75rem' }}>
-              <AlertCircle size={12} /> Only {flight.available_seats} seats left!
+              <AlertCircle size={12} />
+              <ShinyText text={`Only ${flight.available_seats} seats left!`} speed={2.5} color="#b45309" shineColor="#ffffff" />
             </span>
           ) : (
             <span className="badge badge-success" style={{ fontSize: '0.75rem' }}>
